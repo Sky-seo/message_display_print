@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Input</title>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: #111;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    .wrap {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      box-sizing: border-box;
+    }
+
+    #textInput {
+      width: min(640px, 100%);
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid #444;
+      background: rgba(30, 30, 30, 0.92);
+      color: #fff;
+      outline: none;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <input id="textInput" placeholder="Type and press Enter..." autocomplete="off" />
+  </div>
+
+  <script>
+    const inputEl = document.getElementById('textInput');
+    let isComposing = false;
+
+    inputEl.addEventListener('compositionstart', () => {
+      isComposing = true;
+    });
+    inputEl.addEventListener('compositionend', () => {
+      isComposing = false;
+    });
+
+    inputEl.addEventListener('keydown', async (e) => {
+      if (e.key !== 'Enter') return;
+      if (isComposing || e.isComposing) return;
+      e.preventDefault();
+
+      const value = inputEl.value.trim();
+      if (!value) return;
+
+      try {
+        const response = await fetch('/api/inputs', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ value })
+        });
+        if (!response.ok) {
+          console.error('Failed to save input:', await response.text());
+          return;
+        }
+        inputEl.value = '';
+      } catch (error) {
+        console.error('Failed to save input:', error);
+      }
+    });
+  </script>
+</body>
+</html>

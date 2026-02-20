@@ -1,0 +1,31 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #111;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+#ui {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 14px;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 10;
+}
+
+#textInput {
+  width: min(560px, calc(100vw - 32px));
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid #444;
+  background: rgba(30, 30, 30, 0.9);
+  color: #fff;
+  outline: none;
+  font-size: 16px;
+  pointer-events: auto;
+}
