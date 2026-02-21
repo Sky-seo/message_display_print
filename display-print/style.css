@@ -29,3 +29,32 @@ html, body {
   font-size: 16px;
   pointer-events: auto;
 }
+
+body.input-page {
+  margin: 0;
+  height: 100vh;
+  background: #111;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+body.input-page .wrap {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+body.input-page #textInput {
+  width: min(640px, 100%);
+  padding: 12px 16px;
+  border-radius: 999px;
+  border: 1px solid #444;
+  background: rgba(30, 30, 30, 0.92);
+  color: #fff;
+  outline: none;
+  font-size: 16px;
+}
